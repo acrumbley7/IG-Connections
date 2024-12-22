@@ -1,12 +1,187 @@
-
 <!doctype html>
 <html>
   <head>
-    <meta  charset="UTF-8">
+    <meta charset="UTF-8">
     <title>IG-Connections</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="main/script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+      body {
+        margin: 0 auto;
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+      .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 20px;
+        background-image: url('assets/header.jpg'); /* Replace with your image URL */
+        background-size: cover; /* Ensures the image covers the entire header */
+        background-position: left 20%; /* Centers the image */
+        color: white; /* Ensures text is visible over the background */
+        position: relative; /* To position the button on the top right */
+        border-bottom: 1px solid #ddd; /* Optional: Keeps the border under the header */
+        height: 100px; /* Adjust height to fit the background image */
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 33px;
+      }
+      .header button {
+        position: absolute;
+        right: 30px; /* Align to the right */
+        top: 40%;
+        transform: translateY(-50%);
+        background-color: #007bff;
+        color: white;
+        border: none;
+        font-size: 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        width: 10%;
+        height: 35%;
+      }
+      .header button:hover {
+        background-color: #0056b3;
+      }
+      input {
+        width: 250px; 
+        height: 20px;
+        font-size: 16px; 
+        padding: 5px; 
+        margin-top: 10px;
+      }
+      button {
+        width: 100px;
+        height: 30px; 
+        font-size: 16px; 
+        cursor: pointer; 
+        margin-top: 10px;
+      }
+      .list-container {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        padding: 20px;
+      }
+      .list-box {
+        width: 30%;
+        text-align: center;
+      }
+      .list-title {
+        font-weight: bold;
+        font-size: 20px;
+        margin-bottom: 5px;
+        text-align: center;
+      }
+      .list {
+        list-style-type: none;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        font-size: 17px;
+        line-height: 1.8;
+        height: 350px; /* Increased height */
+        overflow: hidden; /* Disable scrolling */
+        text-align: left;                 
+      }
+      .pagination-controls {
+        margin-top: 10px;
+      }
+      .pagination-controls button {
+        padding: 5px 10px;
+        margin: 0 5px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .pagination-controls div {
+        font-size: 14px;
+        color: #333;
+      }
+      /* Modal Container */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1000; /* Above other content */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scrolling if needed */
+        background-color: rgba(0, 0, 0, 0.5); /* Black background with transparency */
+      }
+
+      /* Modal Content */
+      .modal-content {
+        background-color: #fff;
+        margin: 15% auto; /* Centered vertically and horizontally */
+        padding: 20px;
+        border: 1px solid #888;
+        border-radius: 10px;
+        width: 60%; /* Adjust width as needed */
+        text-align: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Close Button */
+      .close-button {
+        color: #aaa;
+        float: right;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close-button:hover,
+      .close-button:focus {
+        color: #000;
+        text-decoration: none;
+      }
+    </style>
   </head>
   <body>
-    <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
+    <div class="header">
+      <h1>Welcome to IG-Connections!</h1>
+      <button id="instructions-button">Instructions</button>
+    </div>
+    <div id="instructions-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Instructions</h2>
+        <p>Here are the steps to use IG-Connections:</p>
+        <ol>
+          <li>Upload your "Before" and "After" folders.</li>
+          <li>Click "Submit" to analyze the data.</li>
+          <li>View the results in the lists provided.</li>
+        </ol>
+      </div>
+    </div>
+    <div>
+      <h2>Upload your folders here</h2>
+      <label for="before-folder"> Before Folder: </label>
+      <input type="file" id="before-folder" webkitdirectory>
+      <br><br>
+      <label for="after-folder"> After Folder: </label>
+      <input type="file" id="after-folder" webkitdirectory>
+      <br><br>
+      <button id="submit-button">Submit</button>
+      <button id="download-button" disabled>Download</button>
+    </div>
+    <div id="list-container" class="list-container">
+      <div id="list-box" class="list-box">
+        <div class="list-title">Users That Unfollowed You</div>
+        <pre id="unfollowed" class="list"></pre>
+        <div id="unfollowed-pagination" class="pagination-controls"></div>
+      </div>
+      <div class="list-box">
+        <div class="list-title">Users Not Following You Back</div>
+        <pre id="not-following-back" class="list"></pre>
+        <div id="not-following-back-pagination" class="pagination-controls"></div>
+      </div>
+    </div>
   </body>
 </html>
