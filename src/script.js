@@ -14,6 +14,7 @@ const modal = document.getElementById("instructions-modal");
 
 document.getElementById("instructions-button").addEventListener("click", () => {
   modal.style.display = "block";
+  modal.scrollTo(0,0);
 });
 
 document.querySelector(".close-button").addEventListener("click", () => {
@@ -24,6 +25,7 @@ window.addEventListener("click", (event) => {
   if (event.target === modal) {
     modal.style.display = "none";
   }
+  modal.scrollTo(0,0);
 });
 
 document.getElementById('submit-button').addEventListener('click', () => {
