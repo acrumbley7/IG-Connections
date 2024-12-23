@@ -159,15 +159,11 @@ function paginate(elementId, data) {
 function generateFiles() {
     const zip = new JSZip();
 
-    // Add "unfollowed" data to a text file
     zip.file("unfollowed.txt", unfollowed.join('\n'));
 
-    // Add "notFollowingBack" data to a text file
     zip.file("not_following_back.txt", notFollowingBack.join('\n'));
 
-    // Generate the ZIP file and download
     zip.generateAsync({ type: "blob" }).then((content) => {
-        // Create a download link and trigger it
         const link = document.createElement('a');
         link.href = URL.createObjectURL(content);
         link.download = "IG-Connections.zip";
