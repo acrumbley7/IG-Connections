@@ -170,7 +170,7 @@ function generateFiles() {
         // Create a download link and trigger it
         const link = document.createElement('a');
         link.href = URL.createObjectURL(content);
-        link.download = "IG-Connections-Lists.zip";
+        link.download = "IG-Connections.zip";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
