@@ -1,0 +1,167 @@
+body {
+    margin: 0 auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-image: url('../assets/header.jpg'); 
+    background-size: cover; 
+    background-position: left 20%; 
+    color: white;
+    position: relative; 
+    border-bottom: 1px solid #ddd; 
+    height: 100px; 
+}
+.header h1 {
+    margin: 0;
+    font-size: 33px;
+}
+.header button {
+    position: absolute;
+    right: 30px; /* Align to the right */
+    top: 40%;
+    transform: translateY(-50%);
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    width: 10%;
+    height: 35%;
+}
+.header button:hover {
+    background-color: #0056b3;
+}
+input {
+    width: 250px; 
+    height: 20px;
+    font-size: 16px; 
+    padding: 5px; 
+    margin-top: 10px;
+}
+button {
+    width: 100px;
+    height: 30px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    margin-top: 10px;
+}
+.list-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px;
+}
+.list-box {
+    width: 30%;
+    text-align: center;
+}
+.list-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+.list {
+    list-style-type: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 17px;
+    line-height: 1.8;
+    height: 350px; /* Increased height */
+    overflow: hidden; /* Disable scrolling */
+    text-align: left;                 
+}
+.pagination-controls {
+    margin-top: 10px;
+}
+.pagination-controls button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.pagination-controls div {
+    font-size: 14px;
+    color: #333;
+}
+/* Modal Container */
+.modal {
+    display: none; /* Hidden by default */
+    position:sticky;
+    z-index: 1000; /* Above other content */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scrolling if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with transparency */
+}
+
+.modal-title {
+    text-align: center;
+    /* position: sticky;  */
+    top: 0; 
+    background-color: #fff;
+    z-index: 1; 
+    padding: 20px 0; 
+    margin: 0 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+#modal-header {
+    position: static;
+}
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    margin: 2% auto; /* Centered vertically and horizontally */
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 60%; /* Adjust width as needed */
+    text-align: left;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: larger;
+    line-height: 60px;
+    max-height: 80vh; /* Restrict the modal height to fit within the viewport */
+    overflow-y: auto; /* Enable vertical scrolling for the modal */
+    position: relative;
+}
+
+/* Close Button */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    /* position: sticky; */
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+.modal-img {
+    width: 85%;
+    height: auto;
+}
+
+.modal-img-container {
+    width: 49%;
+    height: auto;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+}
